@@ -1,0 +1,251 @@
+---
+import { Image } from 'astro:assets';
+
+import astro from '../../assets/b2b/astro.png';
+import doppler from '../../assets/b2b/doppler.jpg';
+import fogbender from '../../assets/b2b/fogbender.png?url';
+import posthog from '../../assets/b2b/posthog.jpg';
+import propelauth from '../../assets/b2b/propelauth.jpg';
+import react from '../../assets/b2b/react.png';
+import stripe from '../../assets/b2b/stripe.jpg';
+import supabase from '../../assets/b2b/supabase.jpg';
+import tailwind from '../../assets/b2b/tailwind.jpg';
+import vercel from '../../assets/b2b/vercel.jpg';
+import b2b7logo from '../../assets/b2b7.svg?url';
+import wink from '../../assets/wink.svg?url';
+import Layout from '../../layouts/Layout.astro';
+import ClipboardCopy from '../utils/ClipboardCopy.astro';
+
+const websiteTitle = 'B2B SaaS Kit';
+
+type LegoPiece = {
+	url: string;
+	imgUrl: typeof astro | string;
+	name: string;
+};
+
+const libraries: LegoPiece[] = [
+	{
+		url: 'https://astro.build/',
+		imgUrl: astro,
+		name: 'Astro',
+	},
+	{
+		url: 'https://react.dev/',
+		imgUrl: react,
+		name: 'React',
+	},
+	{
+		url: 'https://tailwindcss.com/',
+		imgUrl: tailwind,
+		name: 'Tailwind CSS',
+	},
+];
+
+const services: LegoPiece[] = [
+	{
+		url: 'https://www.doppler.com/',
+		imgUrl: doppler,
+		name: 'Doppler',
+	},
+	{
+		url: 'https://propelauth.com/',
+		imgUrl: propelauth,
+		name: 'PropelAuth',
+	},
+	{
+		url: 'https://supabase.com/',
+		imgUrl: supabase,
+		name: 'Supabase',
+	},
+	{
+		url: 'https://vercel.com/',
+		imgUrl: vercel,
+		name: 'Vercel',
+	},
+	{
+		url: 'https://stripe.com/',
+		imgUrl: stripe,
+		name: 'Stripe',
+	},
+	{
+		url: 'https://fogbender.com/',
+		imgUrl: fogbender,
+		name: 'Fogbender',
+	},
+	{
+		url: 'https://posthog.com/',
+		imgUrl: posthog,
+		name: 'PostHog',
+	},
+];
+---
+
+<Layout
+	title={websiteTitle}
+	description="Enabling a developer to go from zero to core business logic in a matter of minutes"
+>
+	<main class="container max-w-[42rem] px-8 pb-12 pt-28 md:mx-auto md:px-0">
+		<a
+			href="https://github.com/fogbender/b2b-saaskit"
+			class="fogbender-github-corner absolute right-0 top-0 z-50 md:fixed"
+			target="_blank"
+			aria-label="View source on GitHub"
+			><svg
+				width="120"
+				height="120"
+				viewBox="0 0 250 250"
+				style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;"
+				aria-hidden="true"
+				><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path
+					d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+					fill="currentColor"
+					style="transform-origin: 130px 106px;"
+					class="octo-arm"></path><path
+					d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+					fill="currentColor"
+					class="octo-body"></path></svg
+			></a
+		>
+
+		<div class="flex items-center gap-6">
+			<div class="w-[5.75rem]">
+				<img class="h-[84px] w-[92px]" src={wink} alt="Winking fox" />
+			</div>
+			<span class="text-[3.625rem] font-bold">B2B SaaS Kit</span>
+		</div>
+
+		<div class="ml-0 mt-16 text-[1.75rem] leading-7 md:ml-[7.25rem]">Friend, hello!</div>
+
+		<div class="ml-0 mt-8 flex flex-col gap-8 text-lg leading-[1.875rem] md:ml-[7.25rem]">
+			<div>
+				<b>B2B SaaS Kit</b> is an instructional bundle for assembling products designed to be used by
+				teams of users (i.e., businesses).
+			</div>
+			<div>
+				The main goal of the kit is to enable a developer to go from zero to core business logic in
+				a matter of double-digit minutes.
+			</div>
+			<div>
+				The secondary goal is to limit the software cost of the product-market-fit search phase for
+				a B2B app to the price of a domain name.
+			</div>
+			<div>
+				The kit combines a number of open-source libraries and for-profit services with generous
+				free-forever starter plans to assemble a functional multiplayer product with an SQL backend.
+			</div>
+		</div>
+
+		<div class="ml-0 mt-8 md:ml-[7.25rem]">
+			<div class="flex flex-wrap gap-6">
+				{
+					[...libraries, ...services].map((x) => (
+						<a href={x.url}>
+							{typeof x.imgUrl === 'string' ? (
+								<img
+									class="h-[86px] w-[86px] rounded-xl bg-white hover:opacity-50"
+									src={x.imgUrl}
+									alt={x.name}
+									width={86 * 2}
+									height={86 * 2}
+									title={x.name}
+								/>
+							) : (
+								<Image
+									class="h-[86px] w-[86px] rounded-xl bg-white hover:opacity-50"
+									src={x.imgUrl}
+									alt={x.name}
+									width={86 * 2}
+									height={86 * 2}
+									title={x.name}
+									loading="eager"
+									decoding="sync"
+								/>
+							)}
+						</a>
+					))
+				}
+			</div>
+		</div>
+
+		<div class="mt-[3.75rem] flex gap-6">
+			<div class="flex min-w-fit justify-end md:min-w-[5.75rem]">
+				<img class="h-10 w-10" src={b2b7logo} alt="Free as in beer" />
+			</div>
+			<div class="text-lg leading-[1.875rem]">
+				To see the kit in action, check out <a href="https://promptswithfriends.com"
+					>Prompts with Friends</a
+				>&mdash;it's a SaaS app built with this kit that lets you collaborate on GPT prompts with
+				teammates.
+			</div>
+		</div>
+
+		<div class="ml-0 mt-8 flex flex-col gap-2 text-lg leading-[1.875rem] md:ml-[7.25rem]">
+			<div>
+				If you'd like to see how it was built, let's get a copy running right here&mdash;on your
+				computer. You'll need Node.js 18 to get going. Then, run this in the terminal:
+			</div>
+
+			<ClipboardCopy>
+				<pre>
+git clone git@github.com:fogbender/b2b-saaskit.git 
+cd b2b-saaskit 
+corepack enable 
+corepack prepare yarn@1.22.19 --activate 
+yarn 
+yarn dev</pre>
+			</ClipboardCopy>
+
+			<div>
+				Open <a href="http://localhost:3000">http://localhost:3000</a> and follow the tutorial 🤘
+			</div>
+		</div>
+
+		<div class="ml-0 mt-8 text-2xl leading-[1.875rem] md:ml-[7.25rem]">
+			But wait! Please ⭐ <a href="https://github.com/fogbender/b2b-saaskit">our open-source repo</a
+			>!
+		</div>
+
+		<style>
+			a {
+				color: #0029ff;
+				text-decoration: underline;
+			}
+
+			a:visited {
+				color: #bc48d9;
+			}
+
+			.fogbender-github-corner:hover .octo-arm {
+				animation: octocat-wave 560ms ease-in-out;
+			}
+
+			@keyframes octocat-wave {
+				0%,
+				100% {
+					transform: rotate(0);
+				}
+				20%,
+				60% {
+					transform: rotate(-25deg);
+				}
+				40%,
+				80% {
+					transform: rotate(10deg);
+				}
+			}
+
+			@media (max-width: 500px) {
+				.github-corner:hover .octo-arm {
+					animation: none;
+				}
+				.github-corner .octo-arm {
+					animation: octocat-wave 560ms ease-in-out;
+				}
+			}
+		</style>
+	</main>
+	<script>
+		document.body.classList.add('overscroll-none');
+	</script>
+</Layout>

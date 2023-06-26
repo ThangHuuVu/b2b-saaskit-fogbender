@@ -1,0 +1,107 @@
+---
+import { CollectionEntry, getEntryBySlug } from 'astro:content';
+
+import SetupStep from '../../components/setup/SetupStep.astro';
+import { websiteTitle } from '../../constants';
+import Layout from '../../layouts/Layout.astro';
+
+type SetupSlug = CollectionEntry<'setup'>['slug'];
+
+const checksOrder: SetupSlug[] = [
+	'doppler',
+	'propelauth',
+	'supabase',
+	'fogbender',
+	'posthog',
+	'github_oauth',
+	'openai',
+	'stripe',
+	'production',
+	'custom_domain',
+];
+
+let firstFail = ''; // debug with: let firstFail = 'fogbender';
+
+const parsedSteps: {
+	stepDone: boolean;
+	step: CollectionEntry<'setup'>;
+}[] = [];
+for (const slug of checksOrder) {
+	const step = await getEntryBySlug('setup', slug);
+	const stepDone = step.data.needsEnv.every((x) => {
+		const value = process.env[x] || import.meta.env[x];
+		return value !== undefined && value !== false;
+	});
+	if (!stepDone && firstFail == '') {
+		firstFail = step.slug;
+	}
+
+	parsedSteps.push({ stepDone, step });
+}
+---
+
+<Layout
+	title={'Set up your own ' + websiteTitle}
+	description="Instructions how to setup the full project locally"
+>
+	<main class="container max-w-[56rem] pb-10">
+		<div class="mt-24 flex w-full flex-col md:flex-row">
+			<div class="ml-10 md:ml-0">
+				<a class="text-lg text-blue-600 hover:text-rose-600 md:text-3xl" href="/">Home</a>
+			</div>
+			<div class="w-full">
+				<div class="ml-10 leading-8">
+					<div class="text-3xl">Set up your own</div>
+					<div class="text-5xl">Prompts with Friends</div>
+				</div>
+				{
+					import.meta.env.PROD && (
+						<div class="ml-10 mt-14">NOTE: This is the production build of the app</div>
+					)
+				}
+				<div class="mt-14 flex w-full flex-col gap-8">
+					{
+						parsedSteps.map(async ({ stepDone, step }, i) => {
+							const { Content } = await step.render();
+							return (
+								<SetupStep
+									scope="setup"
+									id={step.id}
+									title={`${i + 1}. ${step.data.title || step.slug}`}
+									stepDone={stepDone}
+								>
+									<Content />
+								</SetupStep>
+							);
+						})
+					}
+				</div>
+			</div>
+		</div>
+	</main>
+	{/* inline scripts run right away so there will be no flicker */}
+	<script is:inline>
+		{
+			const ls_key = 'setup_section_open';
+			const open = localStorage.getItem(ls_key);
+			const el =
+				open && document.querySelector(`setup-step[data-id="${open}"] input[type="checkbox"]`);
+			el instanceof HTMLInputElement && (el.checked = true);
+		}
+	</script>
+</Layout>
+<style>
+	main {
+		margin: auto;
+	}
+</style>
+<style is:global>
+	html {
+		font-family: system-ui, sans-serif;
+		background-color: #f6f6f6;
+	}
+	code {
+		font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
+			Bitstream Vera Sans Mono, Courier New, monospace;
+	}
+</style>

@@ -1,0 +1,110 @@
+---
+import b2b7logo from '../../assets/b2b7.svg?url';
+import { websiteTitle } from '../../constants';
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title={'Set up your own ' + websiteTitle}>
+	<main class="container max-w-[40rem] px-8 pb-12 md:mx-auto md:px-0">
+		<div class="mt-28 flex items-center gap-6">
+			<div class="w-[5.75rem]">
+				<img class="h-[5.75rem] w-[5.75rem]" src={b2b7logo} alt="B2B7 Logo" />
+			</div>
+			<div class="flex flex-col">
+				<span class="text-[1.75rem]">Set up your own</span>
+				<span class="text-4xl">Prompts with Friends</span>
+			</div>
+		</div>
+
+		<div class="ml-0 mt-16 text-[1.75rem] leading-8 md:ml-[7.25rem]">Developer friend, hello!</div>
+
+		<div class="ml-0 mt-[3.75rem] text-lg leading-[1.875rem] md:ml-[7.25rem]">
+			This is your development copy of <a href="https://promptswithfriends.com/"
+				>PromptsWithFriends.com</a
+			>, designed to showcase the <a href="https://b2bsaaskit.com/">B2B Saas Kit</a>.
+		</div>
+
+		<div class="ml-0 mt-[3.75rem] text-lg leading-[1.875rem] md:ml-[7.25rem]">
+			<div>Getting started:</div>
+			<ol class="ml-7 list-decimal text-blue-600">
+				<li>
+					<a href="/setup">Configure Prompts with Friends on your machine 👈</a>
+				</li>
+				<li>
+					<a href="/app">Try Prompts with Friends on your machine</a>
+				</li>
+				<li>
+					<a href="https://github.com/fogbender/b2b-saaskit">⭐ our open-source repo</a>
+				</li>
+			</ol>
+		</div>
+
+		<div class="ml-0 mt-[3.75rem] text-lg leading-[1.875rem] md:ml-[7.25rem]">
+			<div>
+				The kit combines several open-source libraries with a handful of commercial
+				services&mdash;all featuring generous free-forever starter plans&mdash;to spin up a
+				functional multiplayer (i.e., team-based) application:
+			</div>
+			<ul class="ml-7 list-disc">
+				<li>
+					<a href="https://astro.build/">Astro</a>, an open-source website assembly framework
+				</li>
+				<li>
+					<a href="https://react.dev/">React</a>, an open-source front-end library
+				</li>
+				<li>
+					<a href="https://tailwindcss.com/">Tailwind CSS</a>, an open-source CSS framework
+				</li>
+				<li>
+					<a href="https://doppler.com/">Doppler</a>, a commercial secrets management service
+				</li>
+				<li>
+					<a href="https://propelauth.com/">PropelAuth</a>, a commercial managed user authentication
+					service with focus on B2B
+				</li>
+				<li>
+					<a href="https://supabase.com/">Supabase</a>, an open-source, commercial database service
+				</li>
+				<li>
+					<a href="https://stripe.com/">Stripe</a>, a commercial payments service
+				</li>
+				<li>
+					<a href="https://posthog.com/">PostHog</a>, an open-source, commercial product analytics
+					service
+				</li>
+				<li>
+					<a href="https://fogbender.com/">Fogbender</a>, commercial customer support software with
+					focus on B2B
+				</li>
+				<li>
+					<a href="https://vercel.com/">Vercel</a>, a commercial hosting and deployment service
+				</li>
+			</ul>
+		</div>
+
+		<div class="ml-0 mt-[3.75rem] text-lg leading-[1.875rem] md:ml-[7.25rem]">
+			Some of these libraries and services are necessary, others can be can <a href="/eject"
+				>ejected</a
+			>.
+		</div>
+
+		<div class="ml-0 mt-[3.75rem] text-lg leading-[1.875rem] md:ml-[7.25rem]">
+			Getting help: <a href="https://github.com/fogbender/b2b-saaskit/issues/new"
+				>open an issue on GitHub</a
+			> or ping <a href="https://twitter.com/jlarky">@JLarky</a> and <a
+				href="https://twitter.com/abs">@abs</a
+			> on Twitter
+		</div>
+
+		<style>
+			a {
+				color: #0029ff;
+				text-decoration: underline;
+			}
+
+			a:visited {
+				color: #bc48d9;
+			}
+		</style>
+	</main>
+</Layout>

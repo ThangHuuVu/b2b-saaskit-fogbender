@@ -1,0 +1,76 @@
+---
+import AppLayout from '../../components/app/AppLayout.astro';
+import { Root } from '../../components/app/Root';
+import { createRouterContext } from '../../lib/router';
+import { getGeneratorForPromptUrl } from '../og';
+
+export const prerender = false; // to enable dynamic routing
+
+const res = await createRouterContext(Astro);
+if (res.kind === 'response') {
+	return res.response;
+}
+
+const x = await res.helpers.prompts.getPrompt
+	.fetch({ promptId: Astro.params.promptId! })
+	.then((prompt) => ({ kind: 'ok' as const, prompt }))
+	.catch((error) => ({ kind: 'error' as const, error }));
+
+const info = (() => {
+	if (x.kind !== 'ok') {
+		return;
+	}
+	const { prompt, author } = x.prompt;
+	if (prompt.privacyLevel !== 'public') {
+		return;
+	}
+	let chatTemplate = '';
+	for (const line of prompt.template) {
+		if (line.content.trim() === '') {
+			continue;
+		}
+		const who = line.role === 'user' ? 'You' : line.role === 'system' ? 'System' : 'Assistant';
+		const limit = prompt.template.length > 1 ? 120 : 700;
+		chatTemplate += `${who}: ${limitText(line.content, limit)}\n`;
+		const newChatTemplate = limitText(chatTemplate, 700);
+		if (newChatTemplate !== chatTemplate) {
+			chatTemplate = newChatTemplate;
+			break;
+		}
+	}
+	const authorName = author?.name || prompt.userId;
+	const title = x.prompt.prompt.title.trim() || 'Prompts with Friends';
+
+	const description = limitText(prompt.description, 70) + ' by ' + authorName;
+
+	const ogImage = getGeneratorForPromptUrl({
+		origin: Astro.url.origin,
+		title,
+		description,
+		chatTemplate,
+	});
+	return {
+		title,
+		description,
+		ogImage,
+	};
+})();
+function limitText(test: string, limit = 120) {
+	if (test.length > limit + 3) {
+		return test.slice(0, limit) + '...';
+	}
+	return test;
+}
+const { title, description, ogImage } = info || {};
+// private or unlisted prompts should not be indexed
+const noindex = x.kind === 'error' || x.prompt.prompt.privacyLevel !== 'public';
+---
+
+<AppLayout title={title} description={description} ogImage={ogImage} meta={{ noindex }}>
+	<header class="container mt-8 px-4">
+		<a href="/prompts" class="px-2 py-0.5 text-gray-600 hover:text-gray-900">
+			Discover other public prompts
+		</a>
+	</header>
+	<Root client:load dehydratedState={res.helpers.dehydrate()} getContext={() => res.context} />
+</AppLayout>
